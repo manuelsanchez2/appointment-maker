@@ -1,10 +1,25 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import Form from "./components/Form";
 import Appointment from "./components/Appointment";
 
 function App() {
+  // Appointments in local storage
+  let initialAppointments = JSON.parse(localStorage.getItem("appointments"));
+  if (!initialAppointments) {
+    initialAppointments = [];
+  }
+
   // Appointments array
-  const [appointments, setAppointments] = useState([]);
+  const [appointments, setAppointments] = useState(initialAppointments);
+
+  // Use useEffect to carry out some operations while states change
+  useEffect(() => {
+    if (initialAppointments) {
+      localStorage.setItem("appointments", JSON.stringify(appointments));
+    } else {
+      localStorage.setItem("appointments", JSON.stringify([]));
+    }
+  }, [appointments]);
 
   // Read the new appointment + add the new one
   const createAppointment = (appointment) => {
@@ -19,6 +34,13 @@ function App() {
     );
     setAppointments(newAppointments);
   };
+
+  // Conditional message
+  const title =
+    appointments.length === 0
+      ? "There are no appointments yet"
+      : "See your appointments";
+
   return (
     <Fragment>
       <h1>Appointment maker</h1>
@@ -28,7 +50,7 @@ function App() {
             <Form createAppointment={createAppointment} />
           </div>
           <div className="one-half column">
-            <h2>See your appointments</h2>
+            <h2>{title}</h2>
             {appointments.map((appointment) => (
               <Appointment
                 deleteAppointment={deleteAppointment}
