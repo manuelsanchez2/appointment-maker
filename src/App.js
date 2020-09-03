@@ -14,6 +14,7 @@ function App() {
 
   // Use useEffect to carry out some operations while states change
   useEffect(() => {
+    let initialAppointments = JSON.parse(localStorage.getItem("appointments"));
     if (initialAppointments) {
       localStorage.setItem("appointments", JSON.stringify(appointments));
     } else {

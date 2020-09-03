@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const Appointment = ({ appointment, deleteAppointment }) => {
   return (
@@ -27,6 +28,11 @@ const Appointment = ({ appointment, deleteAppointment }) => {
       </button>
     </div>
   );
+};
+
+Appointment.propTypes = {
+  appointment: PropTypes.object.isRequired,
+  deleteAppointment: PropTypes.func.isRequired,
 };
 
 export default Appointment;
