@@ -19,6 +19,13 @@ function App() {
     );
     setAppointments(newAppointments);
   };
+
+  // Conditional message
+  const title =
+    appointments.length === 0
+      ? "There are no appointments yet"
+      : "See your appointments";
+
   return (
     <Fragment>
       <h1>Appointment maker</h1>
@@ -28,7 +35,7 @@ function App() {
             <Form createAppointment={createAppointment} />
           </div>
           <div className="one-half column">
-            <h2>See your appointments</h2>
+            <h2>{title}</h2>
             {appointments.map((appointment) => (
               <Appointment
                 deleteAppointment={deleteAppointment}
