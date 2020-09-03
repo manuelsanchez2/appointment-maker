@@ -3,12 +3,22 @@ import Form from "./components/Form";
 import Appointment from "./components/Appointment";
 
 function App() {
+  // Appointments in local storage
+  let initialAppointments = JSON.parse(localStorage.getItem("appointments"));
+  if (!initialAppointments) {
+    initialAppointments = [];
+  }
+
   // Appointments array
-  const [appointments, setAppointments] = useState([]);
+  const [appointments, setAppointments] = useState(initialAppointments);
 
   // Use useEffect to carry out some operations while states change
   useEffect(() => {
-    console.log("ready");
+    if (initialAppointments) {
+      localStorage.setItem("appointments", JSON.stringify(appointments));
+    } else {
+      localStorage.setItem("appointments", JSON.stringify([]));
+    }
   }, [appointments]);
 
   // Read the new appointment + add the new one
