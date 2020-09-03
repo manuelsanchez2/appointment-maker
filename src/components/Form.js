@@ -48,7 +48,6 @@ const Form = ({ createAppointment }) => {
 
     // Assign an id
     appointment.id = uuidv4();
-    console.log(appointment);
 
     // Create the appointment
     createAppointment(appointment);

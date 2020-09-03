@@ -1,10 +1,15 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import Form from "./components/Form";
 import Appointment from "./components/Appointment";
 
 function App() {
   // Appointments array
   const [appointments, setAppointments] = useState([]);
+
+  // Use useEffect to carry out some operations while states change
+  useEffect(() => {
+    console.log("ready");
+  }, [appointments]);
 
   // Read the new appointment + add the new one
   const createAppointment = (appointment) => {
