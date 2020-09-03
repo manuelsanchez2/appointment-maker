@@ -43,19 +43,29 @@ const Form = ({ createAppointment }) => {
       setError(true);
       return;
     }
+    // Delete the error message
     setError(false);
+
     // Assign an id
     appointment.id = uuidv4();
     console.log(appointment);
+
     // Create the appointment
     createAppointment(appointment);
+
     // Reset the form
+    setAppointment({
+      pet: "",
+      owner: "",
+      date: "",
+      time: "",
+      problem: "",
+    });
   };
 
   return (
     <Fragment>
-      <h2>Soy formulario, encantado</h2>
-
+      <h2>Create an appointment</h2>
       {error ? <p className="alerta-error">All fields are mandatory</p> : null}
 
       <form onSubmit={submitData}>
